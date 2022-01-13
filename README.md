@@ -1,2 +1,2 @@
 # Tarea_Refactoring
-- José Macías   - Nicolás Plaza   - Kevin Valle   - Fausto Jacome
+- José Macías   - Nicolás Plaza   - Kevin Valle
