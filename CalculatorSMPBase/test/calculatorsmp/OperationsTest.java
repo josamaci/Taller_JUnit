@@ -41,19 +41,21 @@ public class OperationsTest {
      * Test of MakeFormula method, of class Operations.
      */
     @Test
-    public void testMakeFormula() {
+    public void NumbersAndOperators() {
         System.out.println("MakeFormula");
-        String expResult = "";
         String result = Operations.MakeFormula();
-        assertEquals(expResult, result);
+        assertTrue("Si tiene signo", result.contains("+") || result.contains("-") || result.contains("/") || result.contains("*"));
+        assertTrue("Contiene numeros", result.contains("0") || result.contains("1") || result.contains("2") || result.contains("3")
+                || result.contains("4") || result.contains("5") || result.contains("6")|| result.contains("7") || result.contains("8")
+                || result.contains("9"));
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
      * Test of Solve method, of class Operations.
      */
-    @Test
+    /*@Test
     public void testSolve() {
         System.out.println("Solve");
         String formula = "";
@@ -62,6 +64,6 @@ public class OperationsTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
-    }
+    }*/
     
 }
