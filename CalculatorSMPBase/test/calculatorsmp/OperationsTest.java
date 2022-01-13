@@ -5,6 +5,8 @@
  */
 package calculatorsmp;
 
+import java.util.LinkedList;
+import java.util.Stack;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,14 +46,58 @@ public class OperationsTest {
     public void NumbersAndOperators() {
         System.out.println("MakeFormula");
         String result = Operations.MakeFormula();
-        assertTrue("Si tiene signo", result.contains("+") || result.contains("-") || result.contains("/") || result.contains("*"));
-        assertTrue("Contiene numeros", result.contains("0") || result.contains("1") || result.contains("2") || result.contains("3")
-                || result.contains("4") || result.contains("5") || result.contains("6")|| result.contains("7") || result.contains("8")
-                || result.contains("9"));
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        LinkedList<Character> operators = new LinkedList<>();
+        operators.add('+');
+        operators.add('-');
+        operators.add('*');
+        operators.add('/');
+ 
+        boolean hasNumbers = false;
+        boolean hasOperators = false;
+ 
+        for (char character : result.toCharArray()) {
+            if (Character.isDigit(character)) {
+                hasNumbers = true;
+            } else if (operators.contains(character)) {
+                hasOperators = true;
+            } else {
+                hasNumbers = false;
+                hasOperators = false;
+                break;
+            }
+        }
+        assertTrue(hasNumbers && hasOperators);
     }
-
+    
+    public void MinimalRequirement() {
+        System.out.println("MakeFormula");
+        String result = Operations.MakeFormula();
+        Stack<Character> s = new Stack<>();
+        int contOp = 0;
+        int contNum = 0;
+        for(char c: result.toCharArray()){
+            s.push(c);
+        }
+        while(!s.isEmpty()){
+            char c = s.pop();
+            boolean isOperator = c=='+' || c=='-' || c=='*' || c=='/';
+            if(isOperator){
+                contOp++;
+            }else if(Character.isDigit(c)){
+                if(!s.isEmpty() && Character.isDigit(s.peek())){
+                    s.pop();
+                    contNum++;
+                }else{
+                    contNum++;
+                }
+            }else{
+                 break;
+            }
+        }
+        System.out.println(contNum+" "+contOp);
+        assertTrue("Contiene al menos 3 números y 2 operadores.", contOp>=2 && contNum>=3);
+    }
+    
     /**
      * Test of Solve method, of class Operations.
      */
